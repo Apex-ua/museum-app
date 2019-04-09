@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museum</title>
+    <link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <nav>
+        <label for="resultsPerPage">Number of results per page:</label>
+        <select id="resultsPerPage">
+            <option value="10">10</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+        <input type="text" placeholder="What do you want to find?" id="search">
+        <button type="button" onclick="
+            doSearch(
+            document.getElementById('search').value,
+            0,
+            document.getElementById('resultsPerPage').value)">
+            Search
+        </button>
+    </nav>
+    <div id="root"></div>
+
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
+
