@@ -37,14 +37,22 @@ function createCard(inputObject) {
     card.setAttribute('class', 'card');
     const h1 = document.createElement('h1');
     h1.textContent = inputObject.objectNumber;
-    const p = document.createElement('p');
-    p.textContent = inputObject.title;
-    const img = document.createElement('img');
-    img.src = inputObject.webImage.url;
-    img.alt = inputObject.longTitle;
+    const titleDiv = document.createElement('div');
+    titleDiv.textContent = inputObject.title;
+    titleDiv.setAttribute('class', 'overlay');
+    const imgDiv = document.createElement('div');
+    imgDiv.setAttribute('class', 'card-image');
+    imgDiv.style.backgroundImage = 'url(' + inputObject.webImage.url +')';
+    //    imgDiv.style.backgroundPosition = 'center';
+    //    imgDiv.style.backgroundSize = 'cover';
+    //    const img = document.createElement('img');
+    //    img.src = inputObject.webImage.url;
+    //    img.alt = inputObject.longTitle;
+    //    img.title = inputObject.longTitle;
     container.appendChild(card);
     card.appendChild(h1);
-    card.appendChild(p);
-    card.appendChild(img);
+    //    card.appendChild(img);
+    card.appendChild(imgDiv);
+    card.appendChild(titleDiv);
 }
 
