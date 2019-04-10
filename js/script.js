@@ -1,6 +1,8 @@
 const app = document.getElementById('root');
 const container = document.createElement('div');
 container.setAttribute('class', 'container');
+const pageSelect = document.getElementById('pag-pages');
+
 
 app.appendChild(container);
 
@@ -8,7 +10,7 @@ app.appendChild(container);
 //    var resultPage = 0;
 //    var resultsPerPage = 10;
 
-function doSearch(query,resultPage,resultsPerPage,sortResults){
+function doSearch(query, resultPage, resultsPerPage, sortResults) {
     const api_key = 'rfZN5VA1';
     const api_url = `https://www.rijksmuseum.nl/api/en/collection?q=${query}&key=${api_key}&imgonly=true&format=json&p=${resultPage}&ps=${resultsPerPage}&s=${sortResults}`;
     let request = new XMLHttpRequest();
@@ -16,14 +18,16 @@ function doSearch(query,resultPage,resultsPerPage,sortResults){
 
     request.onload = function () {
 
-    let data = JSON.parse(this.response);
-
+        let data = JSON.parse(this.response);
+        console.log(data);
         if (request.status >= 200 && request.status < 400) {
+            console.log(data.count);
+            console.log(resultsPerPage);
+            pagPages(data.count,resultsPerPage);
             data.artObjects.forEach(artObject => {
                 createCard(artObject)
             });
-        }
-        else {
+        } else {
             const errorMessage = document.createElement('p');
             errorMessage.textContent = `Gah, it's not working!`;
             container.appendChild(errorMessage);
@@ -37,12 +41,13 @@ function createCard(inputObject) {
     card.setAttribute('class', 'card');
     const h1 = document.createElement('h1');
     h1.textContent = inputObject.objectNumber;
+    const imgDiv = document.createElement('div');
+    imgDiv.setAttribute('class', 'card-image');
+    imgDiv.style.backgroundImage = 'url(' + inputObject.webImage.url + ')';
     const titleDiv = document.createElement('div');
     titleDiv.textContent = inputObject.title;
     titleDiv.setAttribute('class', 'overlay');
-    const imgDiv = document.createElement('div');
-    imgDiv.setAttribute('class', 'card-image');
-    imgDiv.style.backgroundImage = 'url(' + inputObject.webImage.url +')';
+
     //    imgDiv.style.backgroundPosition = 'center';
     //    imgDiv.style.backgroundSize = 'cover';
     //    const img = document.createElement('img');
@@ -56,3 +61,43 @@ function createCard(inputObject) {
     card.appendChild(titleDiv);
 }
 
+
+ function pagPages(count,resultsPerPage){
+    pageSelect.firstElementChild.remove();
+    let pagesNumber = Math.ceil(count / resultsPerPage);
+    let n = 0;
+    console.log(`number of pages: ${pagesNumber}`);
+    while (pagesNumber != n) {
+        n++;
+        const option = document.createElement('option');
+        option.setAttribute('value', n);
+        option.textContent = n;
+        pageSelect.appendChild(option);
+        console.log(`n: ${n}`);
+    }
+}
+//pagPages(341,50);
+
+function initDefaults(){
+    let query = document.getElementById('search').value;
+    let resultPage = document.getElementById('pag-pages').value;
+    let resultsPerPage = document.getElementById('resultsPerPage').value;
+    let sortResults = document.getElementById('orderBy').value;
+    doSearch(query, resultPage, resultsPerPage, sortResults);
+}
+
+
+
+//container.
+
+
+//document.getElementById("pag-pages").firstElementChild.remove();
+//pageSelect.firstElementChild.remove();
+
+function removeAllCards(container){
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+}
+//removeAllCards(container);
+//clear(pageSelect);

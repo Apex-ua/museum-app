@@ -14,20 +14,14 @@
     <nav>
     <label for="orderBy">Order by:</label>
     <select id="orderBy">
-        <option value="objecttype">on relevance</option>
-        <option value="chronologic">on type</option>
+        <option value="objecttype" selected>on relevance</option>
+        <option value="chronologic" >on type</option>
         <option value="achronologic">chronologically (newest first)</option>
         <option value="artist">on artist (a-z)</option>
         <option value="artistdesc">on artist (z-a)</option>
     </select>
         <input type="text" placeholder="What do you want to find?" id="search">
-        <button type="button" onclick="
-            doSearch(
-            document.getElementById('search').value,
-            0,
-            document.getElementById('resultsPerPage').value,
-            document.getElementById('orderBy').value)
-            ">
+        <button type="button" onclick="initDefaults()">
             Search
         </button>
     </nav>
@@ -35,9 +29,13 @@
     <footer>
         <label for="resultsPerPage">Number of results per page:</label>
         <select id="resultsPerPage">
-            <option value="10">10</option>
+            <option value="10" selected>10</option>
             <option value="50">50</option>
             <option value="100">100</option>
+        </select>
+        <label for="pag-pages">Page:</label>
+        <select name="pag-pages" id="pag-pages">
+            <option value="1" selected>1</option>
         </select>
     </footer>
     <script src="js/script.js"></script>
