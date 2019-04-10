@@ -6,9 +6,16 @@ const pageSelect = document.getElementById('pag-pages');
 
 app.appendChild(container);
 
-//    var query = 'Wine fountain and cooler';
-//    var resultPage = 0;
-//    var resultsPerPage = 10;
+
+
+//var query = 'Wine fountain and cooler';
+//var resultPage = 0;
+//var resultsPerPage = 10;
+//
+//var query = document.getElementById('search');
+//var resultPage = document.getElementById('pag-pages');
+//var resultsPerPage = document.getElementById('resultsPerPage');
+//var sortResults = document.getElementById('orderBy');
 
 function doSearch(query, resultPage, resultsPerPage, sortResults) {
     const api_key = 'rfZN5VA1';
@@ -63,18 +70,20 @@ function createCard(inputObject) {
 
 
  function pagPages(count,resultsPerPage){
-    pageSelect.firstElementChild.remove();
     let pagesNumber = Math.ceil(count / resultsPerPage);
-    let n = 0;
+    let n = 2;
     console.log(`number of pages: ${pagesNumber}`);
-    while (pagesNumber != n) {
-        n++;
-        const option = document.createElement('option');
-        option.setAttribute('value', n);
-        option.textContent = n;
-        pageSelect.appendChild(option);
-        console.log(`n: ${n}`);
+    if (pagesNumber > 1) {
+        while (pagesNumber >= n) {
+            const option = document.createElement('option');
+            option.setAttribute('value', n);
+            option.textContent = n;
+            pageSelect.appendChild(option);
+            console.log(`n: ${n}`);
+            n++;
+        }
     }
+
 }
 //pagPages(341,50);
 
@@ -84,8 +93,35 @@ function initDefaults(){
     let resultsPerPage = document.getElementById('resultsPerPage').value;
     let sortResults = document.getElementById('orderBy').value;
     doSearch(query, resultPage, resultsPerPage, sortResults);
+
 }
 
+function resultsPerPageChange(){
+    removeAllCards(container);
+    removeAllCards(pageSelect);
+    createFirstOption();
+    initDefaults();
+}
+
+function resultPageChange(){
+    removeAllCards(container);
+    initDefaults();
+}
+
+function sortResultsChange(){
+    removeAllCards(container);
+    removeAllCards(pageSelect);
+    createFirstOption();
+    initDefaults();
+    pageSelect.selectedIndex = 1;
+}
+
+function createFirstOption(){
+    let option = document.createElement('option');
+    option.setAttribute('value', 1);
+    option.textContent = 1;
+    pageSelect.appendChild(option);
+}
 
 
 //container.
@@ -101,3 +137,4 @@ function removeAllCards(container){
 }
 //removeAllCards(container);
 //clear(pageSelect);
+//    pageSelect.firstElementChild.remove();
