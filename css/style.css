@@ -92,3 +92,10 @@
   cursor: pointer;
 }
 
+
+
+
+div.unavailable {
+    height: 50px;
+    background-color: lightcoral;
+}

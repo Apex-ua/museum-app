@@ -14,13 +14,14 @@
     <nav>
         <label for="orderBy">Order by:</label>
         <select id="orderBy" onchange="sortResultsChange()">
-            <option value="objecttype" selected>on relevance</option>
-            <option value="chronologic" >on type</option>
+            <option value="relevance">on relevance</option>
+            <option value="objecttype" selected>on type</option>
+            <option value="chronologic" >chronologically (oldest first)</option>
             <option value="achronologic">chronologically (newest first)</option>
             <option value="artist">on artist (a-z)</option>
             <option value="artistdesc">on artist (z-a)</option>
         </select>
-        <input type="text" placeholder="What do you want to find?" id="search">
+        <input type="text" placeholder="Search keyword..." id="search" autocomplete="off">
         <input type="button" value="Search" onclick="getValuesDoSearch()">
     </nav>
     <div id="root"></div>

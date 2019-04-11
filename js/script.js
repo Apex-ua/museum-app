@@ -19,11 +19,16 @@ function doSearch(query, resultPage, resultsPerPage, sortResults) {
         if (request.status >= 200 && request.status < 400) {
             console.log(data.count);
             console.log(resultsPerPage);
-            pagPages(data.count,resultsPerPage);
-            data.artObjects.forEach(artObject => {
-                createCard(artObject)
-            });
-            addListenerToCards();
+            if (data.count == 0){
+                console.log("no result");
+                emptyResult(container);
+            } else {
+                pagPages(data.count,resultsPerPage);
+                data.artObjects.forEach(artObject => {
+                    createCard(artObject)
+                });
+                addListenerToCards();
+            }
         } else {
             const errorMessage = document.createElement('p');
             errorMessage.textContent = `Gah, it's not working!`;
@@ -46,6 +51,12 @@ function createCard(inputObject) {
     container.appendChild(card);
     card.appendChild(imgDiv);
     card.appendChild(titleDiv);
+}
+
+function emptyResult(container){
+    const errorMessage = document.createElement('p');
+    errorMessage.textContent = `Gah, it's not working!`;
+    container.appendChild(errorMessage);
 }
 
 
@@ -170,13 +181,29 @@ function addListenerToCards() {
   }
 
 function fillModalWindow (inputObject){
-    const modalWebImage = document.createElement('img');
-    modalWebImage.src = inputObject.artObject.webImage.url;
-    modalWebImage.alt = inputObject.artObject.title;
+    if(inputObject.artObject.webImage){
+        const modalWebImage = document.createElement('img');
+        modalWebImage.src = inputObject.artObject.webImage.url;
+        modalWebImage.alt = inputObject.artObject.title;
+        modalContent.appendChild(modalWebImage);
+    } else {
+        const unavailableWebImage = document.createElement('div');
+        unavailableWebImage.setAttribute('class', 'unavailable');
+        unavailableWebImage.textContent = "Sorry, full image is unavailable";
+        modalContent.appendChild(unavailableWebImage);
+    }
     const modalHeader = document.createElement('div');
     modalHeader.textContent = inputObject.artObject.longTitle;
-    modalContent.appendChild(modalWebImage);
     modalContent.appendChild(modalHeader);
     modal.style.display = "block";
 }
+
+
+
+
+//object.onchange = function(){myScript};
+//object.addEventListener("change", myScript);
+
+
+//var lastSearchKeyword = document.getElementById('search').value
 
