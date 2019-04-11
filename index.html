@@ -12,18 +12,16 @@
 
 <body>
     <nav>
-    <label for="orderBy">Order by:</label>
-    <select id="orderBy" onchange="sortResultsChange()">
-        <option value="objecttype" selected>on relevance</option>
-        <option value="chronologic" >on type</option>
-        <option value="achronologic">chronologically (newest first)</option>
-        <option value="artist">on artist (a-z)</option>
-        <option value="artistdesc">on artist (z-a)</option>
-    </select>
+        <label for="orderBy">Order by:</label>
+        <select id="orderBy" onchange="sortResultsChange()">
+            <option value="objecttype" selected>on relevance</option>
+            <option value="chronologic" >on type</option>
+            <option value="achronologic">chronologically (newest first)</option>
+            <option value="artist">on artist (a-z)</option>
+            <option value="artistdesc">on artist (z-a)</option>
+        </select>
         <input type="text" placeholder="What do you want to find?" id="search">
-        <button type="button" onclick="initDefaults()">
-            Search
-        </button>
+        <input type="button" value="Search" onclick="getValuesDoSearch()">
     </nav>
     <div id="root"></div>
     <footer>
@@ -37,8 +35,28 @@
         <select name="pag-pages" id="pag-pages" onchange="resultPageChange()">
             <option value="1" selected>1</option>
         </select>
+        <section>
+            <!-- Trigger/Open The Modal -->
+            <button id="myBtn">Open Modal</button>
+
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content" id="modal-content">
+                    <div class="modal-card" id="modal-card">
+
+                    </div>
+                    <span class="close">&times;</span>
+                </div>
+
+
+            </div>
+        </section>
     </footer>
     <script src="js/script.js"></script>
+
+
 </body>
 
 </html>
