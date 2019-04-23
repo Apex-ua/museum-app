@@ -11,49 +11,45 @@
 </head>
 
 <body>
-    <nav>
-        <label for="orderBy">Order by:</label>
-        <select id="orderBy" onchange="sortResultsChange()">
-            <option value="relevance">on relevance</option>
-            <option value="objecttype" selected>on type</option>
-            <option value="chronologic" >chronologically (oldest first)</option>
-            <option value="achronologic">chronologically (newest first)</option>
-            <option value="artist">on artist (a-z)</option>
-            <option value="artistdesc">on artist (z-a)</option>
-        </select>
-        <input type="text" placeholder="Search keyword..." id="search" autocomplete="off">
-        <input type="button" value="Search" onclick="getValuesDoSearch()">
-    </nav>
+    <header>
+        <nav>
+            <label for="orderBy">Order by:</label>
+            <select class="rounded" id="orderBy" onchange="sortResultsChange()">
+                <option value="relevance">on relevance</option>
+                <option value="objecttype" selected>on type</option>
+                <option value="chronologic" >chronologically (oldest first)</option>
+                <option value="achronologic">chronologically (newest first)</option>
+                <option value="artist">on artist (a-z)</option>
+                <option value="artistdesc">on artist (z-a)</option>
+            </select>
+            <input type="text" placeholder="Search keyword..." class="rounded" id="search" autocomplete="off"   size="10" onfocus="clearInput()">
+            <input type="button" value="Search" class="rounded" onclick="getValuesDoSearch()">
+        </nav>
+    </header>
     <div id="root"></div>
     <footer>
         <label for="resultsPerPage">Number of results per page:</label>
-        <select id="resultsPerPage" onchange="resultsPerPageChange()">
+        <select class="rounded" id="resultsPerPage" form="search" onchange="resultsPerPageChange()">
             <option value="10" selected>10</option>
             <option value="50">50</option>
             <option value="100">100</option>
         </select>
         <label for="pag-pages">Page:</label>
-        <select name="pag-pages" id="pag-pages" onchange="resultPageChange()">
+        <select class="rounded" name="pag-pages" id="pag-pages" form="search" onchange="resultPageChange()">
             <option value="1" selected>1</option>
         </select>
         <section>
-            <!-- The Modal -->
             <div id="myModal" class="modal">
-
-                <!-- Modal content -->
                 <div class="modal-content" id="modal-content">
                     <div class="modal-card" id="modal-card">
-
                     </div>
-                    <span class="close">&times;</span>
+                    <span id="close-button" class="button rounded">Close &times;</span>
                 </div>
-
-
             </div>
         </section>
     </footer>
-    <script src="js/script.js"></script>
 
+    <script src="js/script.js"></script>
 
 </body>
 
